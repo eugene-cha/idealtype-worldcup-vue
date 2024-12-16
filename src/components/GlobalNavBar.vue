@@ -12,9 +12,6 @@
         <li class="nav-tab" :class="{ active: $route.path === '/my-page' }">
           <a href="javascript:void(0)" @click="navigateTo('/my-page')">마이페이지</a>
         </li>
-        <li class="nav-tab" :class="{ active: $route.path === '/wldcup-result' }">
-          <router-link to="/wldcup-result">랭크</router-link>
-        </li>
         <li>
           <button @click="toggleTheme">
             <img class="btn-toggle-theme" :src="isDarkMode ? require('@/assets/dark-mode-icon.png') : require('@/assets/light-mode-icon.png')" alt="" />
