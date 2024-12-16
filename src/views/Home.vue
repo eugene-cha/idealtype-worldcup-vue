@@ -180,12 +180,14 @@
         const width = this.windowWidth;
         if (width >= 2560) {
           return 6;
+        } else if (width >= 2100) {
+          return 5;
         } else if (width >= 1440) {
-          return 3;
+          return 4;
         } else if (width >= 1024) {
-          return 2;
+          return 3;
         } else if (width >= 768) {
-          return 1;
+          return 2;
         } else {
           return 1;
         }

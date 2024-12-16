@@ -645,11 +645,12 @@ export async function fetchMyComments(uid) {
         const wldcupSnapshot = await get(wldcupRef);
 
 
+
         if (commentSnapshot.exists()) {
           const commentData = commentSnapshot.val();
           myComments.push({
             wldcupId,                                 // 월드컵 ID
-            title: wldcupSnapshot.val().title,        // 월드컵 제목
+            title: restoreToOriginalString(wldcupSnapshot.val().title),        // 월드컵 제목
             commentId,                                // 댓글 ID
             nickName: commentData.nickName,           // 닉네임
             text: commentData.text,                   // 댓글 내용
