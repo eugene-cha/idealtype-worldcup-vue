@@ -103,22 +103,21 @@
           setTimeout(() => {
             this.isLoading = false;
           }, 1000);
-          return;
+        } else {
+          // NOTE: 이 경고에 속지 마시오 >> Vue: await has no effect on the type of this expression
+          //       Promise resolve 처리 안 해주면 <pending> 상태로 return되어서 truthy한 값으로 인식됨 -> FUCK YOU JS
+          this.isProgress = await checkInProgressWldcup(user, wldcupId);
+
+          // Promise resolve 이후 1초 뒤 시점에 로딩 스피너 제거 (부드러운 화면 전환)
+          setTimeout(() => {
+            this.isLoading = false;
+          }, 1000);
         }
-
-        // NOTE: 이 경고에 속지 마시오 >> Vue: await has no effect on the type of this expression
-        //       Promise resolve 처리 안 해주면 <pending> 상태로 return되어서 truthy한 값으로 인식됨 -> FUCK YOU JS
-        this.isProgress = await checkInProgressWldcup(user, wldcupId);
-
-        // Promise resolve 이후 1초 뒤 시점에 로딩 스피너 제거 (부드러운 화면 전환)
-        setTimeout(() => {
-          this.isLoading = false;
-        }, 1000);
       },
       async fetchWldcup() {
         const wldcupId = this.$route.params.id;
         const wldcup = await fetchWldcup(wldcupId);
-
+        console.log(wldcup.images)
         this.title = wldcup.title;
         this.images = wldcup.images;
         this.description = wldcup.description;

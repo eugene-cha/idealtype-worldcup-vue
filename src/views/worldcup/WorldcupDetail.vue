@@ -93,21 +93,21 @@
         this.isModalVisible = false;
         this.loading(2300);
 
+        const wldcupId = this.$route.params.id;
+        const round = this.currentRound;
+
+        // 아이템 순서 셔플
+        this.wldcup.items = shuffleItems(this.wldcup.items);
+
+        // 1:1 매치 생성
+        const matches = createMatches(this.wldcup.items, round);
+
         // 로그인 상태인 경우, 진행도 저장 공간에 현재 월드컵 매치 정보 초기 데이터 세팅
         const user = auth.currentUser;
         if (user) {
-          const wldcupId = this.$route.params.id;
-          const round = this.currentRound;
-
-          // 아이템 순서 셔플
-          this.wldcup.items = shuffleItems(this.wldcup.items);
-
-          // 1:1 매치 생성
-          const matches = createMatches(this.wldcup.items, round);
-
           await initWldcupProgress(user, wldcupId, round, matches);
-          this.wldcup.matches = matches;
         }
+        this.wldcup.matches = matches;
 
         /**
          * 1:1 매치 대진 구조 생성 함수
