@@ -10,7 +10,7 @@
             :key="comment.id"
             class="comment"
         >
-          <router-link :to="`/wldcup/${comment.wldcupId}/wldcup-result`" class="comment-link">
+          <router-link :to="`/wldcup-result/${comment.wldcupId}`" class="comment-link">
             <div class="title">{{ comment.title }}</div>
             <div class="profile-box">
               <ProfileButton width="40" height="40" :src="user.profileImage"/>
